@@ -25,7 +25,7 @@ export default function LandingPage() {
         <Image className="hidden sm:block absolute h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20 top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2" src="/icons/dollarSign.png" alt="dollar_sign" width={80} height={80} />
         <Image className="hidden sm:block absolute top-[60%] left-[25%] h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 lg:h-32 lg:w-32" src="/icons/trust.png" alt="trust" width={160} height={160} />
 
-        <div className="flex flex-col items-center sm:flex-row sm:items-center">
+        <div className="hidden md:flex md:flex-col md:items-center ">
           <p className="font-light text-left text-[40px] sm:text-[60px] md:text-[80px] lg:text-[100px]">Welcome to</p>
           <Image src="/icons/coin.png" alt="coin" width={80} height={80} /> 
         </div>
@@ -40,8 +40,8 @@ export default function LandingPage() {
             <Button handleClick={handleButtonClick} />
           </Link>
         </div>
-        <Image className="block sm:hidden absolute top-4 left-4 h-12 w-12" src="/icons/dollarSign.png" alt="/icons/dollarSign.png" width={80} height={80} />
-        <Image className="block sm:hidden absolute bottom-4 right-4 h-12 w-12" src="/trust.png" alt="/icons/trust" width={80} height={80} />
+        <Image className="hidden md:block absolute top-4 left-4 h-12 w-12" src="/icons/dollarSign.png" alt="/icons/dollarSign.png" width={80} height={80} />
+        <Image className="hidden md:block absolute bottom-4 right-4 h-12 w-12" src="/icons/trust.png" alt="/icons/trust" width={80} height={80} />
       </div>
     </div>
   );
