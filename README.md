@@ -1,38 +1,25 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Live URL 
+https://neobase-web3.netlify/
 
-## Getting Started
+# Getting Started with Create React App
 
-First, run the development server:
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Clone the project
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### `git clone git@github.com:isahilsachdev/neobase-assignment.git`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## In the project directory, you can run:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### `npm install` to install repository
 
-## Learn More
+### `npm run dev` to start the application
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Images 
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# neobase-assingment
-# neobase-assignment
+<img width="1469" alt="Screenshot 2024-05-22 at 9 11 26 PM" src="https://github.com/isahilsachdev/neobase-assignment/assets/73214085/7ce96f1e-d2be-4685-83c9-0b9b8c61ba93">
+<img width="1469" alt="Screenshot 2024-05-22 at 9 11 04 PM" src="https://github.com/isahilsachdev/neobase-assignment/assets/73214085/fb4a66d9-9539-4a0f-81a3-0c366b6d56a7">
+<img width="1469" alt="Screenshot 2024-05-22 at 9 10 57 PM" src="https://github.com/isahilsachdev/neobase-assignment/assets/73214085/e130cda4-2e12-451d-b7d8-98724dec068b">
+<img width="1469" alt="Screenshot 2024-05-22 at 9 10 50 PM" src="https://github.com/isahilsachdev/neobase-assignment/assets/73214085/0c63e75e-6b7f-4c3d-a538-7a9916c4fce9">
