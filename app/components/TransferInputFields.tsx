@@ -112,7 +112,7 @@ const TransferInputFields: React.FC<TransferInputFieldsProps> = ({ handleTransac
           </div>
           <input
             type="number"
-            placeholder="Amount"
+            placeholder="0"
             value={amount || ''}
             onChange={(e) => setAmount(e.target.value)}
             className="w-[88%] h-full mt-2 bg-[#171717] rounded-[20px] relative z-10 text-[30px] mt-[10px]"
@@ -125,7 +125,7 @@ const TransferInputFields: React.FC<TransferInputFieldsProps> = ({ handleTransac
           </div>
           <input
             type="text"
-            placeholder="User Address"
+            placeholder="0"
             value={recipient || ''}
             onChange={(e) => setRecipient(e.target.value)}
             className="w-[88%] h-full mt-2 bg-[#171717] rounded-[20px] relative z-10 text-[30px] mt-[10px]"
