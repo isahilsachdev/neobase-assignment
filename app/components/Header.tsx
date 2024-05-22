@@ -14,7 +14,7 @@ declare global {
 
 const Header: React.FC = () => {
     const [walletAddress, setWalletAddress] = useState("");
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const pathname = usePathname();
 
     const connectWallet = async () => {
@@ -28,8 +28,8 @@ const Header: React.FC = () => {
             await window.ethereum.request({ method: "eth_requestAccounts" });
             const web3 = new Web3(window.ethereum);
             const accounts = await web3.eth.getAccounts();
+            setLoading(false)
             if (accounts.length > 0) {
-                setLoading(false)
                 setWalletAddress(accounts[0]);
             }
         } catch (err: any) {
@@ -44,7 +44,6 @@ const Header: React.FC = () => {
                 const web3 = new Web3(window.ethereum);
                 const accounts = await web3.eth.getAccounts();
                 if (accounts.length > 0) {
-                    setLoading(false)
                     setWalletAddress(accounts[0]);
                 }
             }
@@ -76,7 +75,7 @@ const Header: React.FC = () => {
                     ) : (
                         <>
                             <Image src="/icons/wallet.svg" alt="wallet" height={18} width={18} />
-                            <p className="text-xs lg:text-base">Connect Wallet</p>
+                            <p className="text-xs lg:text-base">Connect Metamask Wallet</p>
                         </>
                     )}
                 </button>
