@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -36,9 +35,7 @@ export default function LandingPage() {
 
         <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 items-center sm:items-center mt-4 sm:mt-0 sm:-mt-8 md:-mt-10 lg:-mt-14">
           <p className="font-bold text-left text-[40px] sm:text-[60px] md:text-[80px] lg:text-[100px]">Round</p>
-          <Link href="/transfer">
-            <Button handleClick={handleButtonClick} />
-          </Link>
+          <Button handleClick={handleButtonClick} />
         </div>
         <Image className="hidden md:absolute md:top-4 md:left-4 md:h-12 md:w-12" src="/icons/dollarSign.png" alt="/icons/dollarSign.png" width={80} height={80} />
         <Image className="hidden md:absolute md:bottom-4 md:right-4 md:h-12 md:w-12" src="/icons/trust.png" alt="/icons/trust" width={80} height={80} />
