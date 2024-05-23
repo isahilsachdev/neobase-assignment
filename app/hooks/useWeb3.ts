@@ -1,3 +1,4 @@
+'use client';
 import Web3 from "web3";
 import { toast } from "react-toastify";
 import CONFIG from "../../config";

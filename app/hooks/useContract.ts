@@ -1,6 +1,6 @@
+'use client';
 import Web3 from "web3";
 import contractABI from "../contracts/TransferContract";
-import { toast } from "react-toastify";
 
 const useContract = () => {
   const transfer = async (recipient: string, amount: string, networkConfig: any) => {
