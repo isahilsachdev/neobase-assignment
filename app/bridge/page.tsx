@@ -10,7 +10,7 @@ interface Transaction {
     time: string;
 }
 
-const Home: React.FC = () => {
+const Bridge: React.FC = () => {
     const [transactions, setTransactions] = useState<Transaction[]>([]);
 
     const handleTransaction = (id: string, amount: string) => {
@@ -38,4 +38,4 @@ const Home: React.FC = () => {
     );
 };
 
-export default Home;
+export default Bridge;

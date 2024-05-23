@@ -2,7 +2,6 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Web3 from "web3";
-import { usePathname } from 'next/navigation';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -15,7 +14,6 @@ declare global {
 const Header: React.FC = () => {
     const [walletAddress, setWalletAddress] = useState("");
     const [loading, setLoading] = useState(false);
-    const pathname = usePathname();
 
     const connectWallet = async () => {
         setLoading(true);
@@ -50,10 +48,6 @@ const Header: React.FC = () => {
         };
         checkConnection();
     }, []);
-
-    if (pathname !== "/transfer" && pathname !== "/bridge") {
-        return null;
-    }
 
     return (
         <div className="w-full fixed top-5 h-20 ">
