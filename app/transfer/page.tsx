@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react";
-import TransferForm from "../components/TransferInputFields";
+import TransferInputFields from "../components/TransferInputFields";
 import TransactionsTable from "../components/TransactionsTable";
 
 interface Transaction {
@@ -26,7 +26,7 @@ const Home: React.FC = () => {
         <div className="relative">
             
             <div className=" flex justify-center">
-                <TransferForm handleTransaction={handleTransaction} />
+                <TransferInputFields onTransactionComplete={handleTransaction} />
             </div>
             
             {

@@ -1,105 +1,59 @@
 "use client"
 import React, { useState } from "react";
-import Web3 from "web3";
-import CONFIG from "../../config";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CONFIG from "../../config";
 import { isAddress } from 'web3-validator';
-import contractABI from "../contracts/ContractABI";
+import useWeb3 from "../hooks/useWeb3";
+import useContract from "../hooks/useContract";
 
-declare global {
-  interface Window {
-    ethereum: any;
-  }
+interface TransferFormProps {
+  onTransactionComplete: (txHash: string, amount: string) => void;
 }
 
-interface TransferInputFieldsProps {
-  handleTransaction: (id: string, amount: string) => void;
-}
+const TransferInputFields: React.FC<TransferFormProps> = ({ onTransactionComplete }) => {
+  const [receiver, setReceiver] = useState("");
+  const [transferAmount, setTransferAmount] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-interface NetworkConfig {
-  [key: string]: any;
-}
-
-const TransferInputFields: React.FC<TransferInputFieldsProps> = ({ handleTransaction }) => {
-  const [recipient, setRecipient] = useState("");
-  const [amount, setAmount] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const handleNetworkSwitch = async (networkConfig: NetworkConfig) => {
-    try {
-      await window.ethereum.request({
-        method: "wallet_switchEthereumChain",
-        params: [{ chainId: Web3.utils.toHex(networkConfig.chainId) }],
-      });
-    } catch (switchError: any) {
-      if (switchError.code === 4902) {
-        try {
-          await window.ethereum.request({
-            method: "wallet_addEthereumChain",
-            params: [
-              CONFIG.polygon
-            ],
-          });
-        } catch (error: any) {
-          toast.error("Failed to add the network to MetaMask: " + (error.message || error));
-          setLoading(false);
-          return;
-        }
-      } else {
-        toast.error("Failed to switch the network: " + (switchError.message || switchError));
-        setLoading(false);
-        return;
-      }
-    }
-  };
+  const { web3, switchNetwork } = useWeb3();
+  const { transfer } = useContract();
 
   const handleTransfer = async () => {
     if (!window.ethereum) {
-      toast.error("MetaMask is not installed"); // Display error if MetaMask is not installed
+      toast.error("MetaMask is not installed");
       return;
     }
 
-    if (!isAddress(recipient, false)) {
+    if (!isAddress(receiver, false)) {
       toast.error('Invalid recipient address');
       return;
     }
 
-    if (amount === "" || parseFloat(amount) <= 0) {
-      toast.error("Transfer amount is too less"); // Display error if transfer amount is invalid
+    if (transferAmount === "" || parseFloat(transferAmount) <= 0) {
+      toast.error("Transfer amount is too low");
       return;
     }
 
-    setLoading(true);
+    setIsLoading(true);
 
     try {
-      await window.ethereum.request({ method: "eth_requestAccounts" });
+      await web3.eth.requestAccounts();
 
-      const web3 = new Web3(window.ethereum);
       const networkConfig = CONFIG["polygon"];
-
       const currentChainId = await web3.eth.getChainId();
       if (currentChainId !== BigInt(networkConfig.chainId)) {
-        await handleNetworkSwitch(networkConfig);
+        await switchNetwork(networkConfig);
       }
 
-      const contract = new web3.eth.Contract(
-        contractABI,
-        networkConfig.oftContract
-      );
-
-      const accounts = await web3.eth.getAccounts();
-      const amountInWei = web3.utils.toWei(amount, "ether");
-
-      const tx = await contract.methods.transfer(recipient, amountInWei).send({ from: accounts[0] });
-
-      handleTransaction(tx.transactionHash, amount);
+      const txHash = await transfer(receiver, transferAmount, networkConfig);
+      onTransactionComplete(txHash, transferAmount);
       toast.success("Transfer successful!");
     } catch (err: any) {
       toast.error("Transfer failed: " + (err.message || err));
     }
 
-    setLoading(false);
+    setIsLoading(false);
   };
 
   return (
@@ -113,8 +67,8 @@ const TransferInputFields: React.FC<TransferInputFieldsProps> = ({ handleTransac
           <input
             type="number"
             placeholder="0"
-            value={amount || ''}
-            onChange={(e) => setAmount(e.target.value)}
+            value={transferAmount || ''}
+            onChange={(e) => setTransferAmount(e.target.value)}
             className="w-[88%] h-full mt-2 bg-[#171717] rounded-[20px] relative z-10 text-[30px] mt-[10px]"
           />
         </div>
@@ -126,8 +80,8 @@ const TransferInputFields: React.FC<TransferInputFieldsProps> = ({ handleTransac
           <input
             type="text"
             placeholder="0"
-            value={recipient || ''}
-            onChange={(e) => setRecipient(e.target.value)}
+            value={receiver || ''}
+            onChange={(e) => setReceiver(e.target.value)}
             className="w-[88%] h-full mt-2 bg-[#171717] rounded-[20px] relative z-10 text-[30px] mt-[10px]"
           />
         </div>
@@ -136,9 +90,9 @@ const TransferInputFields: React.FC<TransferInputFieldsProps> = ({ handleTransac
           <button
             onClick={handleTransfer}
             className="w-full px-4 py-2 font-bold text-white bg-gradient-to-r from-[#0029FF] to-black rounded-full flex items-center justify-center gap-3 transition duration-300 ease-in-out "
-            disabled={loading}
+            disabled={isLoading}
           >
-            {loading ? (
+            {isLoading ? (
               <span>Loading...</span>
             ) : (
               <>
